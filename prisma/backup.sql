@@ -3,6 +3,7 @@ CREATE TABLE users (
   username VARCHAR(255),
   password VARCHAR(255),
   email VARCHAR(255),
+  login_ip VARCHAR(255),
   created_at DATETIME,
   update_at DATETIME
 );

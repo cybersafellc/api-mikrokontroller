@@ -133,6 +133,16 @@ async function reset(request) {
 			id: result.trash_id,
 		},
 	});
+	await database.organik.deleteMany({
+		where: {
+			trash_id: result.trash_id,
+		},
+	});
+	await database.an_organik.deleteMany({
+		where: {
+			trash_id: result.trash_id,
+		},
+	});
 	return new Response(
 		200,
 		"berhasil reset tong sampah",
