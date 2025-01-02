@@ -29,4 +29,5 @@ router.put(
 	trashController.enebled
 );
 router.put("/trash/reset", authorizationMiddleware.user, trashController.reset);
+router.delete("/trash", authorizationMiddleware.user, trashController.deletes);
 export default router;

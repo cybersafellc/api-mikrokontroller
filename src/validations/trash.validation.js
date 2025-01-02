@@ -46,6 +46,12 @@ const anOrganik = Joi.object({
 	distance: Joi.number().required(),
 });
 
+const deletes = Joi.object({
+	trash_id: Joi.string().required(),
+	id: Joi.string().required(),
+	role: Joi.string().required(),
+});
+
 export default {
 	create,
 	getAll,
@@ -55,4 +61,5 @@ export default {
 	getById,
 	organik,
 	anOrganik,
+	deletes,
 };

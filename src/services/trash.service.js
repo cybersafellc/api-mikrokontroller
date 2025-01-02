@@ -235,6 +235,32 @@ async function anOrganik(request) {
 	return new Response(200, "data diterima!", createRes, null, false);
 }
 
+async function deletes(request) {
+	const result = await validation(trashValidation.deletes, request);
+	const count = await database.trash.count({
+		where: {
+			id: result.trash_id,
+		},
+	});
+	if (!count) throw new ResponseError(400, "trash_id tidak valid!");
+	await database.organik.deleteMany({
+		where: {
+			trash_id: result.trash_id,
+		},
+	});
+	await database.an_organik.deleteMany({
+		where: {
+			trash_id: result.trash_id,
+		},
+	});
+	const deleteRes = await database.trash.delete({
+		where: {
+			id: result.trash_id,
+		},
+	});
+	return new Response(200, "berhasil menghapus!", deleteRes, null, false);
+}
+
 export default {
 	create,
 	getAll,
@@ -244,4 +270,5 @@ export default {
 	getById,
 	organik,
 	anOrganik,
+	deletes,
 };

@@ -76,6 +76,15 @@ async function anOrganik(req, res, next) {
 	}
 }
 
+async function deletes(req, res, next) {
+	try {
+		const response = await trashService.deletes(req.body);
+		res.status(response.status).json(response).end();
+	} catch (error) {
+		next(error);
+	}
+}
+
 export default {
 	create,
 	getAll,
@@ -85,4 +94,5 @@ export default {
 	getById,
 	organik,
 	anOrganik,
+	deletes,
 };
