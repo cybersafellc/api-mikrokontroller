@@ -166,14 +166,16 @@ async function getById(request) {
 				id: result.id,
 			},
 		});
-		await database.trash.update({
-			data: {
-				reset: false,
-			},
-			where: {
-				id: result.id,
-			},
-		});
+		if (trash.reset) {
+			await database.trash.update({
+				data: {
+					reset: false,
+				},
+				where: {
+					id: result.id,
+				},
+			});
+		}
 		return new Response(200, "berhasil!", trash, null, false);
 	} else {
 		const trash = await database.trash.findUnique({
